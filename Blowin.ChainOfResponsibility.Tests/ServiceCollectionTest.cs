@@ -1,6 +1,6 @@
-﻿using Blowin.ChainOfResponsibility_DependencyInjection;
 using Blowin.ChainOfResponsibility.Finally;
 using Blowin.ChainOfResponsibility.Middleware;
+using Blowin.ChainOfResponsibility_DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +25,7 @@ public class ServiceCollectionTest
         service3.Should().NotBeNull();
         service4.Should().NotBeNull();
     }
-    
+
     [Fact]
     public void EmptyAssembly_Should_Not_Add_Services()
     {
@@ -51,7 +51,7 @@ public class ServiceCollectionTest
         provider.Count.Should().Be(1);
         provider.Should().ContainSingle(descriptor => descriptor.ImplementationType == typeof(ChainOfResponsibility<,>) && descriptor.Lifetime == lifetime);
     }
-    
+
     [Fact]
     public void One_Assembly_Should_Add_Services()
     {
@@ -68,7 +68,7 @@ public class ServiceCollectionTest
     [InlineData(ServiceLifetime.Transient)]
     public void Two_Assembly_Should_Add_Services(ServiceLifetime lifetime)
     {
-        var provider = new ServiceCollection().AddChainOfResponsibility(new []{ typeof(FuncMiddleware<,>).Assembly, typeof(CustomMiddleware).Assembly }, cnf => cnf.WithMiddlewareLifetime(lifetime));
+        var provider = new ServiceCollection().AddChainOfResponsibility(new[] { typeof(FuncMiddleware<,>).Assembly, typeof(CustomMiddleware).Assembly }, cnf => cnf.WithMiddlewareLifetime(lifetime));
 
         provider.Count.Should().Be(5);
         provider.Should().ContainSingle(descriptor => descriptor.ImplementationType == typeof(FuncMiddleware<,>) && descriptor.Lifetime == lifetime);

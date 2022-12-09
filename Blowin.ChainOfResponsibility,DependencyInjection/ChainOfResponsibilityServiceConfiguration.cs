@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,7 +26,7 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
             ChainOfResponsibilityLifetime = lifetime;
             return this;
         }
-        
+
         public ChainOfResponsibilityServiceConfiguration WithMiddlewareLifetimeResolver(Func<Type, ServiceLifetime> lifetimeResolver)
         {
             LifetimeResolver = lifetimeResolver;

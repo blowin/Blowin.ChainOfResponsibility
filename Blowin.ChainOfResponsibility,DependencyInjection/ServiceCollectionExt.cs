@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 using Blowin.ChainOfResponsibility;
@@ -23,12 +23,12 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
         {
             var configuration = new ChainOfResponsibilityServiceConfiguration(assemblies);
             configurationAction?.Invoke(configuration);
-            
+
             foreach (var assembly in configuration.Assemblies)
                 self.AddChainOfResponsibility(assembly.GetTypes(), configuration);
 
             self.Add(new ServiceDescriptor(typeof(ChainOfResponsibility<,>), typeof(ChainOfResponsibility<,>), configuration.ChainOfResponsibilityLifetime));
-            
+
             return self;
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Blowin.ChainOfResponsibility.Finally;
@@ -14,12 +14,12 @@ namespace Blowin.ChainOfResponsibility
         {
             _lazyHandler = new Lazy<Func<T, TRes>>(() => MergeChain(middlewares, finallyBlock));
         }
-        
+
         public ChainOfResponsibility(IEnumerable<IMiddleware<T, TRes>> middlewares, IEnumerable<IFinally<T, TRes>> finallyBlocks)
             : this(middlewares, finallyBlocks?.FirstOrDefault())
         {
         }
-        
+
         public TRes Execute(T parameter) => _lazyHandler.Value(parameter);
 
         private static Func<T, TRes> MergeChain(IEnumerable<IMiddleware<T, TRes>> middlewares, IFinally<T, TRes> finallyBlock)

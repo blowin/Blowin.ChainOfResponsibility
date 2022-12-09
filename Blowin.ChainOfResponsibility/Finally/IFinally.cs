@@ -1,4 +1,4 @@
-﻿namespace Blowin.ChainOfResponsibility.Finally
+namespace Blowin.ChainOfResponsibility.Finally
 {
     public interface IFinally<in TIn, out TOut>
     {
