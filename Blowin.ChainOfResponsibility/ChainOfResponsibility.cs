@@ -37,7 +37,7 @@ namespace Blowin.ChainOfResponsibility
 
         private static Func<T, TRes> ToFunc(IFinally<T, TRes> @finally)
         {
-            if(@finally == null)
+            if (@finally == null)
                 return parameter => throw new InvalidOperationException($"Unhandled parameter '{parameter}'");
             if (@finally is FuncFinally<T, TRes> value)
                 return value.Func;
