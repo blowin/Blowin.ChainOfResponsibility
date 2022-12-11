@@ -24,8 +24,7 @@ namespace Blowin.ChainOfResponsibility
 
         private static Func<T, TRes> MergeChain(IEnumerable<IMiddleware<T, TRes>> middlewares, IFinally<T, TRes> finallyBlock)
         {
-            var @finally = finallyBlock ?? new FallbackFinally();
-            Func<T, TRes> handler = arg => @finally.Run(arg);
+            var handler = ToFunc(finallyBlock);
             var middlewareList = middlewares ?? Array.Empty<IMiddleware<T, TRes>>();
             foreach (var middleware in middlewareList.Reverse())
             {
@@ -36,9 +35,13 @@ namespace Blowin.ChainOfResponsibility
             return handler;
         }
 
-        private sealed class FallbackFinally : IFinally<T, TRes>
+        private static Func<T, TRes> ToFunc(IFinally<T, TRes> @finally)
         {
-            public TRes Run(T parameter) => throw new InvalidOperationException($"Unhandled parameter '{parameter}'");
+            if(@finally == null)
+                return parameter => throw new InvalidOperationException($"Unhandled parameter '{parameter}'");
+            if (@finally is FuncFinally<T, TRes> value)
+                return value.Func;
+            return @finally.Run;
         }
     }
 }
