@@ -14,15 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blowin.ChainOfResponsibility" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Blowin.ChainOfResponsibility\Blowin.ChainOfResponsibility.csproj" />
   </ItemGroup>
 
 </Project>
