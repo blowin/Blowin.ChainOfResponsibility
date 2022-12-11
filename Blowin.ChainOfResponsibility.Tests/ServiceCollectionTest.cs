@@ -1,6 +1,6 @@
+using Blowin.ChainOfResponsibility.DependencyInjection;
 using Blowin.ChainOfResponsibility.Finally;
 using Blowin.ChainOfResponsibility.Middleware;
-using Blowin.ChainOfResponsibility_DependencyInjection;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 

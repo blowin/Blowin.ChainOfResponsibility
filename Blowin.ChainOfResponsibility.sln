@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blowin.ChainOfResponsibility", "Blowin.ChainOfResponsibility\Blowin.ChainOfResponsibility.csproj", "{F67401F7-991F-4430-BD40-5CD02A9CD251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blowin.ChainOfResponsibility,DependencyInjection", "Blowin.ChainOfResponsibility,DependencyInjection\Blowin.ChainOfResponsibility,DependencyInjection.csproj", "{DF1319A9-1311-4271-B0B3-2D6A018C6784}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blowin.ChainOfResponsibility.DependencyInjection", "Blowin.ChainOfResponsibility.DependencyInjection\Blowin.ChainOfResponsibility.DependencyInjection.csproj", "{DF1319A9-1311-4271-B0B3-2D6A018C6784}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blowin.ChainOfResponsibility.Tests", "Blowin.ChainOfResponsibility.Tests\Blowin.ChainOfResponsibility.Tests.csproj", "{799B4815-9BED-4998-84D3-E19F27B80DC3}"
 EndProject

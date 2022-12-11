@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Blowin.ChainOfResponsibility_DependencyInjection</RootNamespace>
+    <RootNamespace>Blowin.ChainOfResponsibility.DependencyInjection</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Title>Blowin.ChainOfResponsibility,DependencyInjection</Title>
+    <Title>Blowin.ChainOfResponsibility.DependencyInjection</Title>
     <Description>Simple chain of responsibility implementation in .NET</Description>
     <PackageProjectUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</PackageProjectUrl>
     <RepositoryUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</RepositoryUrl>

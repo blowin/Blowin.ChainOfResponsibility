@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blowin.ChainOfResponsibility,DependencyInjection\Blowin.ChainOfResponsibility,DependencyInjection.csproj" />
+    <ProjectReference Include="..\Blowin.ChainOfResponsibility.DependencyInjection\Blowin.ChainOfResponsibility.DependencyInjection.csproj" />
     <ProjectReference Include="..\Blowin.ChainOfResponsibility\Blowin.ChainOfResponsibility.csproj" />
   </ItemGroup>
 

@@ -1,12 +1,11 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Blowin.ChainOfResponsibility;
 using Blowin.ChainOfResponsibility.Finally;
 using Blowin.ChainOfResponsibility.Middleware;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Blowin.ChainOfResponsibility_DependencyInjection
+namespace Blowin.ChainOfResponsibility.DependencyInjection
 {
     /// <summary>
     /// Extension for IServiceCollection.

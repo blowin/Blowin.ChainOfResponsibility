@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Blowin.ChainOfResponsibility_DependencyInjection
+namespace Blowin.ChainOfResponsibility.DependencyInjection
 {
     /// <summary>
     /// Configuration for ChainOfResponsibility registration.
