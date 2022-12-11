@@ -7,7 +7,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [Fact]
         public void Execute_Empty()
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>().Build();
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>().Build();
 
             Assert.Throws<InvalidOperationException>(() => chain.Execute(string.Empty));
         }
@@ -18,7 +18,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("123456", true)]
         public void Execute_Only_Finally(string inputValue, bool expectedResult)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithFinally(s => s.Length > 5)
                 .Build();
 
@@ -34,7 +34,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_1_Middleware_Should_Be_Success(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, _) => s == inputData)
                 .Build();
 
@@ -50,7 +50,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_2_Middleware_Should_Be_Success(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, _) => s == inputData)
                 .Build();
@@ -67,7 +67,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_3_Middleware_Should_Be_Success(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, _) => s == inputData)
@@ -85,7 +85,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_1_Middleware_Should_Be_Fail_Without_Appropriate_Middleware_And_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .Build();
 
@@ -99,7 +99,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_2_Middleware_Should_Be_Fail_Without_Appropriate_Middleware_And_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
                 .Build();
@@ -114,7 +114,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_3_Middleware_Should_Be_Fail_Without_Appropriate_Middleware_And_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, bool>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
@@ -130,7 +130,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_1_Middleware_Should_Be_Success_With_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, string>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, string>()
                 .WithMiddleware((s, next) => next(s))
                 .WithFinally((s) => s)
                 .Build();
@@ -147,7 +147,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_2_Middleware_Should_Be_Success_With_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, string>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, string>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
                 .WithFinally((s) => s)
@@ -165,7 +165,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("qf qwf qwfq")]
         public void Execute_With_3_Middleware_Should_Be_Success_With_Finally(string inputData)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, string>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, string>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
@@ -185,7 +185,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         [InlineData("a", "b", "c12", "d", "d123")]
         public void Execute_With_3_Middleware_Should_Call_Right_Number_Of_Times(string v1, string v2, string v3, string parameter, string expectedResult)
         {
-            var chain = new ChainOfResponsibilityBuilder<string, string>()
+            var chain = ChainOfResponsibilityBuilder.Create<string, string>()
                 .WithMiddleware((s, next) => s == v1 ? s : next(s + "1"))
                 .WithMiddleware((s, next) => s == v2 ? s : next(s + "2"))
                 .WithMiddleware((s, next) => s == v3 ? s : next(s + "3"))

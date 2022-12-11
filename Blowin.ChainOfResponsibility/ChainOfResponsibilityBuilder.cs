@@ -1,91 +1,32 @@
-using System;
-using System.Collections.Generic;
-using Blowin.ChainOfResponsibility.Finally;
-using Blowin.ChainOfResponsibility.Middleware;
+using System.Threading.Tasks;
 
 namespace Blowin.ChainOfResponsibility
 {
     /// <summary>
-    /// A class for creating ChainOfResponsibility.
+    /// Factory methods.
     /// </summary>
-    /// <typeparam name="T">
-    /// parameter.
-    /// </typeparam>
-    /// <typeparam name="TRes">
-    /// result.
-    /// </typeparam>
-    public sealed class ChainOfResponsibilityBuilder<T, TRes>
+    public static class ChainOfResponsibilityBuilder
     {
-        private readonly List<IMiddleware<T, TRes>> _middlewares = new List<IMiddleware<T, TRes>>();
-        private IFinally<T, TRes> _finally;
-
         /// <summary>
-        /// Adds finally block to builder.
+        /// Create <see cref="ChainOfResponsibilityBuilder{T,TRes}"/>.
         /// </summary>
-        /// <param name="finally">
-        /// Finally block.
-        /// </param>
-        /// <returns>
-        /// Builder.
-        /// </returns>
-        public ChainOfResponsibilityBuilder<T, TRes> WithFinally(IFinally<T, TRes> @finally)
+        /// <typeparam name="T"> parameter. </typeparam>
+        /// <typeparam name="TRes"> result. </typeparam>
+        /// <returns><see cref="ChainOfResponsibilityBuilder{T,TRes}"/>.</returns>
+        public static ChainOfResponsibilityBuilder<T, TRes> Create<T, TRes>()
         {
-            _finally = @finally;
-            return this;
+            return new ChainOfResponsibilityBuilder<T, TRes>();
         }
 
         /// <summary>
-        /// Adds middleware to builder.
+        /// Create async <see cref="ChainOfResponsibilityBuilder{T,TRes}"/>.
         /// </summary>
-        /// <param name="middleware">
-        /// Middleware.
-        /// </param>
-        /// <returns>
-        /// Builder.
-        /// </returns>
-        public ChainOfResponsibilityBuilder<T, TRes> WithMiddleware(IMiddleware<T, TRes> middleware)
+        /// <typeparam name="T"> parameter.</typeparam>
+        /// <typeparam name="TRes"> result.</typeparam>
+        /// <returns><see cref="ChainOfResponsibilityBuilder{T,TRes}"/>.</returns>
+        public static ChainOfResponsibilityBuilder<AsyncRequest<T>, Task<TRes>> CreateAsync<T, TRes>()
         {
-            _middlewares.Add(middleware);
-            return this;
-        }
-
-        /// <summary>
-        /// Adds finally block (delegate) to builder.
-        /// </summary>
-        /// <param name="finally">
-        /// Finally block as delegate.
-        /// </param>
-        /// <returns>
-        /// Builder.
-        /// </returns>
-        public ChainOfResponsibilityBuilder<T, TRes> WithFinally(Func<T, TRes> @finally)
-        {
-            return WithFinally(new FuncFinally<T, TRes>(@finally));
-        }
-
-        /// <summary>
-        /// Adds middleware (delegate) to builder.
-        /// </summary>
-        /// <param name="middleware">
-        /// Middleware as delegate.
-        /// </param>
-        /// <returns>
-        /// Builder.
-        /// </returns>
-        public ChainOfResponsibilityBuilder<T, TRes> WithMiddleware(Func<T, Func<T, TRes>, TRes> middleware)
-        {
-            return WithMiddleware(new FuncMiddleware<T, TRes>(middleware));
-        }
-
-        /// <summary>
-        /// Build <see cref="ChainOfResponsibility"/>.
-        /// </summary>
-        /// <returns>
-        /// Create <see cref="ChainOfResponsibility"/>.
-        /// </returns>
-        public ChainOfResponsibility<T, TRes> Build()
-        {
-            return new ChainOfResponsibility<T, TRes>(_middlewares, _finally);
+            return new ChainOfResponsibilityBuilder<AsyncRequest<T>, Task<TRes>>();
         }
     }
 }

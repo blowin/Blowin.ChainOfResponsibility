@@ -30,6 +30,29 @@ public interface IFinally<in TIn, out TOut>
 }
 ```
 
+There are also extensions for asynchronous versions
+
+```csharp
+public interface IAsyncFinally<TIn, TOut> : IFinally<AsyncRequest<TIn>, Task<TOut>>
+{
+}
+
+public interface IAsyncMiddleware<TIn, TOut> : IMiddleware<AsyncRequest<TIn>, Task<TOut>>
+{
+}
+
+public sealed class AsyncRequest<T> : IEquatable<AsyncRequest<T>>
+{
+    public T Parameter { get; }
+
+    public CancellationToken CancellationToken { get; }
+
+    public AsyncRequest(T parameter);
+
+    public AsyncRequest(T parameter, CancellationToken cancellationToken);
+}
+```
+
 # Samples
 
 Thanks to these 2 interfaces, you can create a flexible pipeline.
@@ -53,10 +76,21 @@ public sealed class ChainOfResponsibilityBuilder<T, TRes>
 }
 ```
 
+There are factory methods to create a synchronous and asynchronous version of ChainOfResponsibility
+
+```csharp
+public static class ChainOfResponsibilityBuilder
+{
+    public static ChainOfResponsibilityBuilder<T, TRes> Create<T, TRes>();
+
+    public static ChainOfResponsibilityBuilder<AsyncRequest<T>, Task<TRes>> CreateAsync<T, TRes>();
+}
+```
+
 Usage
 
 ```csharp
-var chain = new ChainOfResponsibilityBuilder<string, string>()
+var chain = ChainOfResponsibilityBuilder.Create<string, string>()
     .WithMiddleware((s, func) => func(s + " World"))
     .WithFinally(s => s + " from ChainOfResponsibility")
     .Build();
