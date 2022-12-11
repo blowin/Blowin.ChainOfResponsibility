@@ -8,24 +8,69 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blowin.ChainOfResponsibility_DependencyInjection
 {
+    /// <summary>
+    /// Extension for IServiceCollection.
+    /// </summary>
     public static class ServiceCollectionExt
     {
-        public static IServiceCollection AddChainOfResponsibility(this IServiceCollection self, Assembly assembly,
+        /// <summary>
+        /// Adds ChainOfResponsibility with <see cref="IMiddleware{TIn,TOut}"/> and <see cref="IFinally{TIn,TOut}"/> in <param name="assembly"></param> to IServiceCollection.
+        /// </summary>
+        /// <param name="self">
+        /// IServiceCollection.
+        /// </param>
+        /// <param name="assembly">
+        /// Assembly for analysis.
+        /// </param>
+        /// <param name="configurationAction">
+        /// Delegate which allows you to configure the registration.
+        /// </param>
+        /// <returns>
+        /// Configured IServiceCollection.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When assembly = null.
+        /// </exception>
+        public static IServiceCollection AddChainOfResponsibility(
+            this IServiceCollection self,
+            Assembly assembly,
             Action<ChainOfResponsibilityServiceConfiguration> configurationAction = null)
         {
             if (assembly == null)
+            {
                 throw new ArgumentNullException(nameof(assembly));
+            }
 
             return self.AddChainOfResponsibility(new[] { assembly }, configurationAction);
         }
 
+        /// <summary>
+        /// Adds ChainOfResponsibility with <see cref="IMiddleware{TIn,TOut}"/> and <see cref="IFinally{TIn,TOut}"/> in <param name="assemblies"></param> to IServiceCollection.
+        /// </summary>
+        /// <param name="self">
+        /// IServiceCollection.
+        /// </param>
+        /// <param name="assemblies">
+        /// Assemblies for analysis.
+        /// </param>
+        /// <param name="configurationAction">
+        /// Delegate which allows you to configure the registration.
+        /// </param>
+        /// <returns>
+        /// Configured IServiceCollection.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// When assembly = null.
+        /// </exception>
         public static IServiceCollection AddChainOfResponsibility(this IServiceCollection self, Assembly[] assemblies, Action<ChainOfResponsibilityServiceConfiguration> configurationAction = null)
         {
             var configuration = new ChainOfResponsibilityServiceConfiguration(assemblies);
             configurationAction?.Invoke(configuration);
 
             foreach (var assembly in configuration.Assemblies)
+            {
                 self.AddChainOfResponsibility(assembly.GetTypes(), configuration);
+            }
 
             self.Add(new ServiceDescriptor(typeof(ChainOfResponsibility<,>), typeof(ChainOfResponsibility<,>), configuration.ChainOfResponsibilityLifetime));
 
@@ -40,12 +85,16 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
             foreach (var asmType in types)
             {
                 if (asmType.IsAbstract || asmType.IsInterface || (!asmType.IsPublic && !asmType.IsNestedPublic))
+                {
                     continue;
+                }
 
                 var interfaces = FilterInterfaces(asmType, middlewareType, finallyType);
 
                 if (!interfaces.Any(i => i.Finally || i.Middleware) || !configuration.TypeEvaluator(asmType))
+                {
                     continue;
+                }
 
                 foreach (var (iType, _, _) in interfaces)
                 {
