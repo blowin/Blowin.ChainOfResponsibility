@@ -1,5 +1,9 @@
 # Blowin.ChainOfResponsibility
 
+![CI](https://img.shields.io/github/workflow/status/blowin/Blowin.ChainOfResponsibility/build)
+[![NuGet](https://img.shields.io/nuget/v/Blowin.ChainOfResponsibility)](https://www.nuget.org/packages/Blowin.ChainOfResponsibility/)
+[![NuGet (DI)](https://img.shields.io/nuget/v/Blowin.ChainOfResponsibility.DependencyInjection)](https://www.nuget.org/packages/Blowin.ChainOfResponsibility.DependencyInjection/)
+
 Simple [chain of responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) implementation in .NET
 
 ## There are 2 main concepts in the library
