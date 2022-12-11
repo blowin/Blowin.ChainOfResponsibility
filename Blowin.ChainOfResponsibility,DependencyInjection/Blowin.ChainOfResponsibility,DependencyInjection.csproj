@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Blowin.ChainOfResponsibility_DependencyInjection</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>Blowin.ChainOfResponsibility,DependencyInjection</Title>
+    <Description>Simple chain of responsibility implementation in .NET</Description>
+    <PackageProjectUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
