@@ -38,7 +38,7 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
         /// <summary>
         /// Gets the delegate who will determine with what level of life will be registered IFinally or IMiddleware.
         ///
-        /// Where Type = IMiddleware or IFinally
+        /// Where Type = IMiddleware or IFinally.
         /// </summary>
         public Func<Type, ServiceLifetime> LifetimeResolver { get; private set; } = type => ServiceLifetime.Scoped;
 
@@ -73,7 +73,7 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
         /// Sets LifetimeResolver.
         /// </summary>
         /// <param name="lifetimeResolver">.
-        /// <see cref="LifetimeResolver"/>
+        /// <see cref="LifetimeResolver"/>.
         /// </param>
         /// <returns>
         /// Configuration.
@@ -123,7 +123,7 @@ namespace Blowin.ChainOfResponsibility_DependencyInjection
         /// Sets TypeEvaluator.
         /// </summary>
         /// <param name="typeEvaluator">.
-        /// <see cref="TypeEvaluator"/>
+        /// <see cref="TypeEvaluator"/>.
         /// </param>
         /// <returns>
         /// Configuration.
