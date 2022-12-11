@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</PackageProjectUrl>
     <RepositoryUrl>https://github.com/blowin/Blowin.ChainOfResponsibility</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <Authors>Blowin</Authors>
   </PropertyGroup>
 
   <ItemGroup>
