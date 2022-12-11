@@ -1,7 +1,4 @@
-using Blowin.ChainOfResponsibility.Finally;
-using Blowin.ChainOfResponsibility.Middleware;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Blowin.ChainOfResponsibility.Tests
 {
@@ -55,7 +52,7 @@ namespace Blowin.ChainOfResponsibility.Tests
         {
             var chain = new ChainOfResponsibilityBuilder<string, bool>()
                 .WithMiddleware((s, next) => next(s))
-                .WithMiddleware((s, next) => s == inputData)
+                .WithMiddleware((s, _) => s == inputData)
                 .Build();
 
             var result = chain.Execute(inputData);
@@ -73,7 +70,7 @@ namespace Blowin.ChainOfResponsibility.Tests
             var chain = new ChainOfResponsibilityBuilder<string, bool>()
                 .WithMiddleware((s, next) => next(s))
                 .WithMiddleware((s, next) => next(s))
-                .WithMiddleware((s, next) => s == inputData)
+                .WithMiddleware((s, _) => s == inputData)
                 .Build();
 
             var result = chain.Execute(inputData);
